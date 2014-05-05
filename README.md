@@ -1,7 +1,7 @@
 curve255js
 ==========
 
-A sample Javascript implementation of the Curve25519 elliptic cryptography function by Daniel J. Bernstein.
+Javascript implementation of the Curve25519 elliptic cryptography function by Daniel J. Bernstein.
 
 Synopsis:
 ````javascript
@@ -14,7 +14,7 @@ As in curve25519-donna, some bits in the private key are altered to harden the o
 Private and public keys are represented by arrays of 16-bit values, starting from the least significant ones:
 
 ````
-key = arr[0] + arr[1] × 2^16 + arr[2] × 2^32 + … + arr[15] × 2^(16*15)
+key = arr[0] + arr[1] × 2^16 + arr[2] × 2^32 + … + arr[15] × 2^(16 × 15)
 ````
 
 Please note that, while the main function is free of conditional branching, its actual constant-time operation is dependent on the Javascript implementation of numerical operations being also constant-time.
@@ -37,7 +37,7 @@ If you are one of the contributors and want to add yourself or change the inform
 Copyright and MIT licensing
 ---------------------------
 
-Copyright (c) 2007, 2013 Michele Bini
+Copyright (c) 2007, 2013, 2014 Michele Bini
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
