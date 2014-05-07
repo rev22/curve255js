@@ -466,6 +466,15 @@ function curve25519(f, c) {
     return curve25519_raw(f, c);
 }
 </script>
+<script type="text/javascript">
+// This version of the functions takes as arguments and returns keys in base32 encoding
+function curve25519b32(a, b) {
+  if (b != null) {
+       b = c255lbase32decode(b);
+  };
+  return c255lbase32encode(curve25519(c255lbase32decode(a), b));
+}
+</script>
 </head>
 <body style="text-align:right;">
 <h2>Generate a shared secret with Curve25519</h2>
