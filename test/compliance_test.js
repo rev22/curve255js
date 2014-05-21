@@ -12,6 +12,8 @@
  *
  * You should have received a copy of the license along with this
  * program.
+ *
+ * Minor modifications by Michele Bini
  */
 
 
