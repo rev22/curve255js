@@ -19,6 +19,16 @@ key = arr[0] + arr[1] × 2^16 + arr[2] × 2^32 + … + arr[15] × 2^(16 × 15)
 
 Please note that, while the main function is free of conditional branching, its actual constant-time operation is dependent on the Javascript implementation of numerical operations being also constant-time.
 
+
+Testing
+-------
+
+For consistency and conformance testing, you can run the script `test-curve25519.coffee` under tests/
+
+The output should be identical to `test-curve25519.c` from the reference
+implementation: http://cr.yp.to/ecdh/curve25519-20050915.tar.gz
+
+
 Contributors
 ------------
 
