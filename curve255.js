@@ -392,8 +392,8 @@ function c255ldbl(x, z) {
 }
 
 function c255lsum(x, z, x_p, z_p, x_1) {
-  var x_3, z_3, k, l, p, q;
-  //tracev("sum x", x);
+  var x_3, z_3, p, q;
+  //tracev("sum wx", x);
   //tracev("sum z", z);
   p = c255lmulmodp(c255lsubmodp(x, z), c255laddmodp(x_p, z_p));
   q = c255lmulmodp(c255laddmodp(x, z), c255lsubmodp(x_p, z_p));
@@ -416,9 +416,9 @@ function curve25519_raw(f, c) {
 
   var n = 255;
 
+  // For correct constant-time operation, bit 255 should always be set to 1 so the following 'while' loop is never entered
   while (c255lgetbit(f, n) == 0) {
     n--;
-    // For correct constant-time operation, bit 255 should always be set to 1 so the following 'while' loop is never entered
     if (n < 0) {
       return c255lzero();
     }
