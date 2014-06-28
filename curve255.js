@@ -404,17 +404,15 @@ function c255lsum(x, z, x_p, z_p, x_1) {
   return [x_3, z_3];
 }
 
-
 function curve25519_raw(f, c) {
   var a, x_1, q;
 
   x_1 = c;
   //tracev("c", c);
-  //tracev("x_1", x_1);
   a = c255ldbl(x_1, c255lone());
   //tracev("x_a", a[0]);
   //tracev("z_a", a[1]);
-  q = [ x_1, c255lone() ];
+  q = [ x_1.slice(0), c255lone() ];
 
   var n = 255;
 
@@ -427,18 +425,20 @@ function curve25519_raw(f, c) {
   }
   n--;
 
-  var aq = [ a, q ];
-    
   while (n >= 0) {
     var r, s;
     var b = c255lgetbit(f, n);
-    r = c255lsum(aq[0][0], aq[0][1], aq[1][0], aq[1][1], x_1);
-    s = c255ldbl(aq[1-b][0], aq[1-b][1]);
-    aq[1-b]  = s;
-    aq[b]    = r;
+    var a_or_q = [ [], [] ];
+    cond_copy(a_or_q[0], q[0], a[0], b);
+    cond_copy(a_or_q[1], q[1], a[1], b);
+    r = c255lsum(a[0], a[1], q[0], q[1], x_1);
+    s = c255ldbl(a_or_q[0], a_or_q[1]);
+    cond_copy(q[0], s[0], r[0], b);
+    cond_copy(q[1], s[1], r[1], b);
+    cond_copy(a[0], r[0], s[0], b);
+    cond_copy(a[1], r[1], s[1], b);
     n--;
   }
-  q = aq[1];
 
   //tracev("x", q[0]);
   //tracev("z", q[1]);
@@ -447,6 +447,17 @@ function curve25519_raw(f, c) {
   q[0] = c255lmulmodp(q[0], q[1]);
   c255lreduce(q[0]);
   return q[0];
+
+  // Constant-time conditional copy
+  function cond_copy(r, a, b, c) {
+    var m2 = (-c)&0xffff;
+    var m1 = (~m2)&0xffff;
+    var n = 0;
+    while (n < 16) {
+      r[n] = (a[n] & m1) | (b[n] & m2);
+      n++;
+    }
+  }
 }
 
 function curve25519b32(a, b) {
