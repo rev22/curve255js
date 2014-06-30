@@ -42,6 +42,8 @@ Among the contributors, in no particular order:
 
 [Guy Kloss](https://github.com/pohutukawa): performance improvements through bit-shift operations
 
+[maxrmp](https://github.com/maxrmp): reported about the [support of full 256-bit public keys](https://moderncrypto.org/mail-archive/curves/2014/000183.html)
+
 If you are one of the contributors and want to add yourself or change the information here, please do submit a pull request.
 
 
